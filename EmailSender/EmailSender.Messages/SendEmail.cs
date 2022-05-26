@@ -3,10 +3,10 @@
     public class SendEmail
     {
         public string Recipient { get; }
-        public string Subject { get; }
-        public string Body { get; }
+        public string? Subject { get; }
+        public string? Body { get; }
 
-        public SendEmail(string recipient, string subject, string body)
+        public SendEmail(string recipient, string? subject, string? body)
         {
             Recipient = recipient;
             Subject = subject;

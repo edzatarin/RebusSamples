@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;

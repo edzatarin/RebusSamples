@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Messages;
+﻿using Messagex;
 using Rebus.Activation;
 using Rebus.Bus;
 using Rebus.Config;
@@ -9,11 +6,11 @@ using Rebus.Logging;
 
 namespace Producer
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            using var bus = Configure.OneWayClient()
+            using var bus = Configure.With(new BuiltinHandlerActivator())
                 .Logging(l => l.ColoredConsole(LogLevel.Warn))
                 .Transport(t => t.UseRabbitMqAsOneWayClient("amqp://localhost"))
                 .Start();
@@ -34,12 +31,15 @@ q) Quit");
                     case 'a':
                         Publish(10, bus);
                         break;
+
                     case 'b':
                         Publish(100, bus);
                         break;
+
                     case 'c':
                         Publish(1000, bus);
                         break;
+
                     case 'q':
                         Console.WriteLine("Quitting");
                         keepRunning = false;
@@ -48,7 +48,7 @@ q) Quit");
             }
         }
 
-        static void Publish(int numberOfJobs, IBus bus)
+        private static void Publish(int numberOfJobs, IBus bus)
         {
             Console.WriteLine("Publishing {0} jobs", numberOfJobs);
 
